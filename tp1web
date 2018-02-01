@@ -1,0 +1,71 @@
+<?php
+function sanitize($data){
+  return htmlspecial(stripslashes(trim($data)));
+}
+
+function validationNomEtPrenom($nom){
+  return empty($nom) && (strlen($nom)>2);
+}
+function validationNumeroDeTelephone($numeroDeTelephone){
+  return empty($numeroDeTelephone) && (strlen($numeroDeTelephone) <= 10);
+}
+
+function validationNbTotalDeSushi($nbTotalSushi){
+  return empty($nbTotalSushi) && ($nbTotalSushi > 0);
+}
+
+$nom = "";
+$prenom = "";
+$numeroDeTelephone;
+$valeurDAcceptation = false;
+$nbDeCalifornien;
+$nbDeBoston;
+$nbDeSaumon;
+$nbDAvocat;
+$nbDeOmelette;
+$nbTotalSushi;
+
+if ($_server["REQUEST_METHOD"] == "POST") {
+  $nom = sanitize($_POST["nom"]);
+  $prenom = sanitize($_POST["prenom"]);
+  $numeroDeTelephone = sanitize($_POST["numeroDeTelephone"]);
+  $nbDeCalifornien = sanitize($_PODT["nbDeCalifornien"]);
+  $nbDeBoston = sanitize($_PODT["nbDeBoston"]);
+  $nbDeSaumon = sanitize($_PODT["nbDeSaumon"]);
+  $nbDAvocat = sanitize($_PODT["nbDAvocat"]);
+  $nbDeOmelette = sanitize($_PODT["nbDOmelette"]);
+
+  $nbTotalSushi = $nbDeCalifornien + $nbDeBoston + $nbDeSaumon + $nbDAvocat + $nbDeOmelette;
+
+  if (validationNomEtPrenom($nom)) {
+    $erreurNom = "Vous devez entré un nom valide.";
+  }
+
+  if (validationNomEtPrenom($prenom)) {
+    $erreurPrenom = "Vous devez entré un prenom valide.";
+  }
+  if (validationNumeroDeTelephone($numeroDeTelephone)) {
+    $erreurNumeroDeTelephone = "Vous devez entré un numéro valide.";
+  }
+
+  if (validationNbTotalDeSushi($nbTotalSushi)) {
+    $erreurNbTotalSushi = "Vous devez commander au mins un sushis."
+  }
+
+
+}
+
+
+ ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Sushi++</title>
+</head>
+<body>
+  <div>
+    
+</body>
+</html>
